@@ -5,21 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Belay Kassanew - Personal Portfolio</title>
 
-<!-- Font Awesome Icons -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 
 <style>
-/* ===== GENERAL ===== */
 body {
     font-family: 'Segoe UI', Arial, sans-serif;
     margin: 0;
-    padding: 0;
     background-color: #f3f7f3;
     color: #333;
-    line-height: 1.6;
 }
 
-/* ===== HEADER ===== */
+/* HEADER */
 header {
     background: linear-gradient(135deg, #2E8B57, #3CB371);
     color: white;
@@ -27,44 +23,28 @@ header {
     padding: 50px 20px;
     border-bottom-left-radius: 50px;
     border-bottom-right-radius: 50px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
 
-header h1 {
-    margin: 0;
-    font-size: 2.5rem;
-}
-
-header p {
-    margin-top: 10px;
-    font-size: 1.1rem;
-    opacity: 0.9;
-}
-
-/* ===== NAVIGATION ===== */
 nav {
     background-color: #2E8B57;
     display: flex;
     justify-content: center;
     position: sticky;
     top: 0;
-    z-index: 1000;
-} <img src="https://github.com/Belayuop/Belaywebsit1/blob/.../ai.jpg">
+}
 
 nav a {
     color: white;
-    padding: 12px 20px;
+    padding: 12px 18px;
     text-decoration: none;
     font-weight: bold;
-    transition: 0.3s;
 }
 
 nav a:hover {
     background-color: #3CB371;
-    border-radius: 5px;
 }
 
-/* ===== SECTIONS ===== */
+/* SECTIONS */
 .section {
     width: 85%;
     max-width: 1100px;
@@ -73,24 +53,18 @@ nav a:hover {
     padding: 30px;
     border-radius: 15px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease;
-}
-
-.section:hover {
-    transform: translateY(-5px);
 }
 
 .section h2 {
     color: #2E8B57;
-    margin-bottom: 20px;
 }
 
-/* ===== INTRO ===== */
+/* INTRO */
 .intro-box {
     display: flex;
-    align-items: center;
     gap: 25px;
     flex-wrap: wrap;
+    align-items: center;
 }
 
 .profile-image {
@@ -99,88 +73,49 @@ nav a:hover {
     border-radius: 50%;
     object-fit: cover;
     border: 5px solid #2E8B57;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.profile-image:hover {
-    transform: scale(1.05);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+/* IMAGES */
+.content-image {
+    width: 100%;
+    max-width: 500px;
+    display: block;
+    margin: 20px auto;
+    border-radius: 15px;
 }
 
-/* ===== PORTFOLIO ===== */
-.portfolio-list {
+.gallery {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 15px;
 }
 
-.card {
-    background: #f4f9f4;
-    padding: 15px;
-    border-left: 5px solid #2E8B57;
-    border-radius: 12px;
-    transition: 0.3s;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-}
-
-.card:hover {
-    transform: scale(1.03);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-}
-
-/* ===== CONTACT FORM ===== */
-input, textarea {
+.gallery img {
     width: 100%;
-    padding: 12px;
-    margin: 8px 0 20px 0;
-    border-radius: 10px;
-    border: 1px solid #bbb;
-    font-size: 1rem;
-    transition: border-color 0.3s, box-shadow 0.3s;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 12px;
 }
 
-input:focus, textarea:focus {
-    border-color: #2E8B57;
-    box-shadow: 0 0 8px rgba(46,139,87,0.3);
-    outline: none;
-}
-
-textarea {
-    height: 150px;
-}
-
+/* BUTTON */
 .btn {
-    background: linear-gradient(45deg, #2E8B57, #3CB371);
-    color: white;
-    padding: 14px 30px;
-    border: none;
-    border-radius: 25px;
-    font-size: 1.1rem;
-    cursor: pointer;
-    transition: transform 0.3s, background 0.3s;
-}
-
-.btn:hover {
-    transform: scale(1.05);
     background: #2E8B57;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
 }
 
-/* ===== SOCIAL ICONS ===== */
+/* SOCIAL */
 .social-icons {
     text-align: center;
-    margin-top: 25px;
+    margin: 30px 0;
 }
 
 .social-icons a {
-    font-size: 36px;
-    margin: 0 12px;
-    transition: transform 0.3s, opacity 0.3s;
-}
-
-.social-icons a:hover {
-    transform: scale(1.2);
-    opacity: 0.7;
+    font-size: 34px;
+    margin: 0 10px;
 }
 
 .facebook { color: #1877F2; }
@@ -188,14 +123,12 @@ textarea {
 .youtube { color: #FF0000; }
 .telegram { color: #0088CC; }
 
-/* ===== FOOTER ===== */
+/* FOOTER */
 footer {
     background: #2E8B57;
+    color: white;
     text-align: center;
     padding: 20px;
-    color: white;
-    margin-top: 40px;
-    border-radius: 15px 15px 0 0;
 }
 </style>
 </head>
@@ -204,16 +137,14 @@ footer {
 
 <header>
     <h1>Belay Kassanew</h1>
-    <p>Computer Science & Public Health Student | Educator | Researcher | IoT Enthusiast</p>
+    <p>Computer Science & Public Health Student | Educator | Researcher</p>
 </header>
 
 <nav>
     <a href="#intro">Home</a>
-    <a href="#skills">Skills</a>
+    <a href="#gallery">Gallery</a>
     <a href="#portfolio">Portfolio</a>
-    <a href="#learning">Online Learning</a>
-    <a href="#support">Support</a>
-    <a href="#chatbot">AI Chatbot</a>
+    <a href="#chatbot">AI</a>
     <a href="#contact">Contact</a>
 </nav>
 
@@ -221,121 +152,69 @@ footer {
 <section class="section" id="intro">
     <h2>About Me</h2>
     <div class="intro-box">
-        <img src="belay.jpg" class="profile-image">
+        <img src="belay.jpg" class="profile-image" alt="Belay">
         <p>
             Hi, I’m <strong>Belay Kassanew</strong>. I study Computer Science and Public Health.
-            My interests include IoT systems, epidemiological research, smart homes, graphic design,
-            and helping students through online teaching.
+            I work on IoT, AI systems, education support, and research.
         </p>
     </div>
 </section>
 
-<!-- ONLINE LEARNING -->
-<section class="section" id="learning">
-    <h2>Online Learning Categories</h2>
-    <ul>
-        <li>Health Science Students</li>
-        <li>Computer Science & Software Students</li>
-        <li>Freshman Students</li>
-        <li>Remedial Students</li>
-        <li>Grade 12 Students</li>
-    </ul>
+<!-- AI IMAGE -->
+<section class="section">
+    <h2>Artificial Intelligence</h2>
+    <img src="ai.jpg" class="content-image" alt="AI">
 </section>
 
-<!-- ⭐ NEW: STUDENT SUPPORT CENTER -->
-<section class="section" id="support">
-    <h2>Student Support Center</h2>
-    <ul>
-        <li><strong>PDF Notes</strong> — Downloadable exam-focused notes</li>
-        <li><strong>Video Tutorials</strong> — Short and clear explanations</li>
-        <li><strong>Past Exam Papers</strong> — With structured answers</li>
-        <li><strong>Study Plans</strong> — Weekly & monthly schedules</li>
-        <li><strong>Quizzes</strong> — Self-assessment interactive tests</li>
-    </ul>
-</section>
-
-<!-- SKILLS -->
-<section class="section" id="skills">
-    <h2>Skills</h2>
-    <ul>
-        <li><strong>Web Development</strong></li>
-        <li><strong>Teaching & Mentorship</strong></li>
-        <li><strong>Epidemiological Research</strong></li>
-        <li><strong>Graphic Design & Creativity</strong></li>
-    </ul>
+<!-- GALLERY -->
+<section class="section" id="gallery">
+    <h2>Gallery</h2>
+    <div class="gallery">
+        <img src="126293643_100243991924529_7983916313022984098_n.jpg" alt="Gallery 1">
+        <img src="hos.jpg" alt="Gallery 2">
+        <img src="h.jpg" alt="Gallery 3">
+    </div>
 </section>
 
 <!-- PORTFOLIO -->
 <section class="section" id="portfolio">
     <h2>Portfolio</h2>
-
-    <h3>Web Development</h3>
-    <div class="portfolio-list">
-        <div class="card">Smart Home System</div>
-        <div class="card">Health Dashboard</div>
-        <div class="card">Portfolio Website</div>
-        <div class="card">IoT Projects</div>
-    </div>
-
-    <h3>Epidemiological Research</h3>
-    <div class="portfolio-list">
-        <div class="card">Air Pollution Study</div>
-        <div class="card">COVID-19 Data Analysis</div>
-        <div class="card">Mental Health & Urbanization</div>
-        <div class="card">Health Trends Analysis</div>
-    </div>
-
-    <h3>Graphic Design</h3>
-    <div class="portfolio-list">
-        <div class="card">Health Campaign Posters</div>
-        <div class="card">UI/UX Web Mockups</div>
-        <div class="card">Infographics</div>
-        <div class="card">Branding & Logos</div>
-    </div>
+    <ul>
+        <li>Smart Home System</li>
+        <li>Health Dashboard</li>
+        <li>IoT Projects</li>
+        <li>Graphic Design</li>
+    </ul>
 </section>
 
-<!-- ⭐ NEW: AI CHATBOT ASSISTANT -->
+<!-- AI CHATBOT -->
 <section class="section" id="chatbot">
-    <h2>AI Chatbot Assistant — BelayBot</h2>
-    <p>Your personal AI assistant for learning, questions, and guidance.</p>
-
-    <div class="card">
-        <p><strong>Features:</strong></p>
-        <ul>
-            <li>Ask academic questions</li>
-            <li>Get summaries & explanations</li>
-            <li>Practice quizzes</li>
-            <li>Study support 24/7</li>
-        </ul>
-        <button class="btn">Open BelayBot</button>
-    </div>
+    <h2>BelayBot AI Assistant</h2>
+    <p>Your personal learning assistant.</p>
+    <button class="btn">Open BelayBot</button>
 </section>
 
 <!-- CONTACT -->
 <section class="section" id="contact">
-    <h2>Contact Me</h2>
-    <p>Feel free to reach out for collaborations or questions.</p>
-
+    <h2>Contact</h2>
     <form>
-        <input type="text" placeholder="Your Name" required>
-        <input type="email" placeholder="Your Email" required>
-        <textarea placeholder="Your Message"></textarea>
-        <button class="btn">Send Message</button>
+        <input type="text" placeholder="Name" required><br><br>
+        <input type="email" placeholder="Email" required><br><br>
+        <textarea placeholder="Message" rows="5"></textarea><br><br>
+        <button class="btn">Send</button>
     </form>
 </section>
 
-<!-- SOCIAL -->
 <div class="social-icons">
-    <a href="https://www.facebook.com/belaykassanew.wasie" class="facebook"><i class="fab fa-facebook"></i></a>
-    <a href="https://et.linkedin.com/in/belay-kassanew-54743720a" class="linkedin"><i class="fab fa-linkedin"></i></a>
+    <a href="#" class="facebook"><i class="fab fa-facebook"></i></a>
+    <a href="#" class="linkedin"><i class="fab fa-linkedin"></i></a>
     <a href="#" class="youtube"><i class="fab fa-youtube"></i></a>
     <a href="#" class="telegram"><i class="fab fa-telegram"></i></a>
 </div>
 
 <footer>
-    <p>© 2025 Belay Kassanew — All Rights Reserved</p>
+    <p>© 2025 Belay Kassanew</p>
 </footer>
 
 </body>
 </html>
-
