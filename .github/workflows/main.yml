@@ -13,15 +13,12 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
-    - name: Login to Azure
-      uses: azure/login@v1
-      with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
-
-    - name: Upload files to Azure Blob Storage
+    - name: Upload files to Azure Blob
       run: |
         az storage blob upload-batch \
           --account-name belayakassanew \
           --destination \$web \
           --source . \
           --overwrite
+      env:
+        AZURE_STORAGE_KEY: ${{ secrets.AZURE_STORAGE_KEY }}
