@@ -44,6 +44,40 @@ nav a:hover {
     background-color: #3CB371;
 }
 
+/* DROPDOWN NAV */
+.nav-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropbtn {
+    color: white;
+    padding: 12px 18px;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 180px;
+    z-index: 1000;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.dropdown-content .subsection {
+    padding: 10px;
+    cursor: pointer;
+    color: #2E8B57;
+}
+
+.dropdown-content .subsection:hover {
+    background-color: #f1f1f1;
+}
+
 /* SECTIONS */
 .section {
     width: 85%;
@@ -160,6 +194,11 @@ footer {
     50% { transform: scale(1.1); }
     100% { transform: scale(1); }
 }
+
+/* HIDE NOTES BY DEFAULT */
+#education-notes .subsection {
+    display: none;
+}
 </style>
 </head>
 
@@ -176,6 +215,18 @@ footer {
     <a href="#portfolio">Portfolio</a>
     <a href="#chatbot">AI</a>
     <a href="#contact">Contact</a>
+    
+    <!-- EDUCATION DROPDOWN -->
+    <div class="nav-dropdown">
+        <a href="javascript:void(0)" class="dropbtn" onclick="toggleDropdown()">Education ⬇</a>
+        <div id="education-dropdown" class="dropdown-content">
+            <div class="subsection" onclick="showNote('medical')">Medical Student</div>
+            <div class="subsection" onclick="showNote('software')">Software Student</div>
+            <div class="subsection" onclick="showNote('grade12')">Grade 12 Student</div>
+            <div class="subsection" onclick="showNote('remedial')">Remedial Student</div>
+            <div class="subsection" onclick="showNote('english')">English for General</div>
+        </div>
+    </div>
 </nav>
 
 <!-- INTRO -->
@@ -256,6 +307,50 @@ footer {
     </form>
 </section>
 
+<!-- EDUCATION NOTES (HIDDEN BY DEFAULT) -->
+<section class="section" id="education-notes">
+    <div id="medical" class="subsection">
+        <h3>Medical Student Notes</h3>
+        <ul>
+            <li>Brain & Spinal Tumors</li>
+            <li>Clinical Skills & Anatomy</li>
+            <li>Pathophysiology Overview</li>
+        </ul>
+    </div>
+    <div id="software" class="subsection">
+        <h3>Software Student Notes</h3>
+        <ul>
+            <li>Programming Concepts</li>
+            <li>Data Structures & Algorithms</li>
+            <li>Software Development Lifecycle</li>
+        </ul>
+    </div>
+    <div id="grade12" class="subsection">
+        <h3>Grade 12 Student Notes</h3>
+        <ul>
+            <li>Mathematics</li>
+            <li>Physics & Chemistry</li>
+            <li>English & Literature</li>
+        </ul>
+    </div>
+    <div id="remedial" class="subsection">
+        <h3>Remedial Student Notes</h3>
+        <ul>
+            <li>Basic Mathematics</li>
+            <li>Reading & Writing Skills</li>
+            <li>Fundamental Sciences</li>
+        </ul>
+    </div>
+    <div id="english" class="subsection">
+        <h3>English for General Notes</h3>
+        <ul>
+            <li>Grammar & Vocabulary</li>
+            <li>Reading Comprehension</li>
+            <li>Writing Skills</li>
+        </ul>
+    </div>
+</section>
+
 <div class="social-icons">
     <a href="#" class="facebook"><i class="fab fa-facebook"></i></a>
     <a href="#" class="linkedin"><i class="fab fa-linkedin"></i></a>
@@ -266,6 +361,24 @@ footer {
 <footer>
     <p>© 2025 Belay Kassanew</p>
 </footer>
+
+<script>
+// Toggle dropdown visibility
+function toggleDropdown() {
+    const dropdown = document.getElementById('education-dropdown');
+    dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+}
+
+// Show only clicked note and hide others
+function showNote(noteId) {
+    const notes = ['medical','software','grade12','remedial','english'];
+    notes.forEach(id => {
+        document.getElementById(id).style.display = id === noteId ? 'block' : 'none';
+    });
+    // hide the dropdown after selection
+    document.getElementById('education-dropdown').style.display = 'none';
+}
+</script>
 
 </body>
 </html>
