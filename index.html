@@ -150,12 +150,21 @@ nav a:hover {
 .social-icons a {
     font-size: 34px;
     margin: 0 10px;
+    transition: transform 0.3s, opacity 0.3s;
 }
 
 .facebook { color: #1877F2; }
 .linkedin { color: #0A66C2; }
 .youtube { color: #FF0000; }
 .telegram { color: #0088CC; }
+.instagram { color: #E1306C; }
+.youtube-short { color: #FF0000; }
+.x { color: #1DA1F2; }
+
+.social-icons a:hover {
+    transform: scale(1.2);
+    opacity: 0.8;
+}
 
 /* FOOTER */
 footer {
@@ -350,6 +359,7 @@ footer {
     </div>
 </section>
 
+<!-- SOCIAL ICONS -->
 <div class="social-icons">
     <a href="https://facebook.com/belaykassanew.wasie" class="facebook" target="_blank">
         <i class="fab fa-facebook"></i>
@@ -365,9 +375,6 @@ footer {
     </a>
     <a href="https://instagram.com/belaykassanew" class="instagram" target="_blank">
         <i class="fab fa-instagram"></i>
-    </a>
-    <a href="https://youtube.com/shorts/PAaXlw2J0f0" class="youtube-short" target="_blank">
-        <i class="fab fa-youtube"></i>
     </a>
     <a href="https://x.com/Belaydbu" class="x" target="_blank">
         <i class="fab fa-x-twitter"></i>
@@ -398,5 +405,3 @@ function showNote(noteId) {
 
 </body>
 </html>
-
-
