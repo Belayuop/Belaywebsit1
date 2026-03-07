@@ -8,17 +8,17 @@ import os, random, datetime
 # ===== CONFIG =====
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret123'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///online_learning.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///belay_portfolio.db'
 app.config['UPLOAD_FOLDER'] = 'uploads'
 if not os.path.exists(app.config['UPLOAD_FOLDER']):
     os.makedirs(app.config['UPLOAD_FOLDER'])
 
-# Email config (Gmail example)
+# Email config
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USERNAME'] = 'youremail@gmail.com'  # replace
-app.config['MAIL_PASSWORD'] = 'yourpassword'         # replace
+app.config['MAIL_USERNAME'] = 'youremail@gmail.com'
+app.config['MAIL_PASSWORD'] = 'yourpassword'
 
 # ===== INIT =====
 db = SQLAlchemy(app)
@@ -36,6 +36,7 @@ class User(db.Model, UserMixin):
     verified = db.Column(db.Boolean, default=False)
     verification_code = db.Column(db.String(6))
     assignments = db.relationship('Assignment', backref='student', lazy=True)
+    messages = db.relationship('MessageModel', backref='user', lazy=True)
 
 class Course(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -65,6 +66,14 @@ class QuizResult(db.Model):
     score = db.Column(db.Integer)
     taken_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
 
+class MessageModel(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    name = db.Column(db.String(100))
+    email = db.Column(db.String(100))
+    message = db.Column(db.Text)
+    created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
+
 # ===== LOGIN =====
 @login_manager.user_loader
 def load_user(user_id):
@@ -74,63 +83,61 @@ def load_user(user_id):
 
 @app.route('/')
 def index():
-    return render_template("index.html")  # Use templates folder instead of inline HTML
+    courses = Course.query.all()
+    return render_template("index.html", user=current_user, courses=courses)
 
-# ===== AI Chatbot Endpoint =====
+# ===== AI Chatbot =====
 @app.route('/chatbot', methods=['POST'])
 @login_required
 def chatbot():
     user_msg = request.json.get("message")
-    # Replace with your AI logic; here simple echo:
-    bot_reply = f"BelayBot says: You typed '{user_msg}'"
-    return jsonify({"response": bot_reply})
+    # simple demo AI
+    if "hi" in user_msg.lower():
+        reply = f"Hello {current_user.name}! I am BelayBot."
+    elif "project" in user_msg.lower():
+        reply = "You can check all IoT, AI, and web projects in the Courses section."
+    else:
+        reply = f"BelayBot: I received '{user_msg}'"
+    return jsonify({"response": reply})
 
-# ===== Quiz Routes =====
-@app.route('/quizzes')
-@login_required
-def quizzes():
-    all_quizzes = Quiz.query.all()
-    return render_template("quizzes.html", quizzes=all_quizzes)
-
-@app.route('/submit-quiz', methods=['POST'])
-@login_required
-def submit_quiz():
-    score = 0
-    for key, value in request.form.items():
-        quiz = Quiz.query.get(int(key))
-        if quiz.answer.strip().lower() == value.strip().lower():
-            score += 1
-    result = QuizResult(student_id=current_user.id, score=score)
-    db.session.add(result)
+# ===== CONTACT =====
+@app.route('/contact', methods=['POST'])
+def contact():
+    name = request.form['name']
+    email = request.form['email']
+    message = request.form['message']
+    user_id = current_user.id if current_user.is_authenticated else None
+    msg = MessageModel(user_id=user_id,name=name,email=email,message=message)
+    db.session.add(msg)
     db.session.commit()
-    flash(f"You scored {score} out of {Quiz.query.count()}")
-    return redirect(url_for('quizzes'))
+    flash("Message sent successfully!")
+    return redirect(url_for('index'))
 
-# ===== Courses, Upload, Assignment =====
+# ===== Courses & Uploads =====
 @app.route('/courses')
 @login_required
 def courses():
     courses = Course.query.all()
-    return render_template("courses.html", courses=courses, user=current_user)
+    return render_template("courses.html", courses=courses)
 
-@app.route('/upload', methods=['GET','POST'])
+@app.route('/upload-course', methods=['GET','POST'])
 @login_required
 def upload_course():
     if current_user.role != 'admin':
         return "Access Denied"
-    if request.method=='POST':
+    if request.method == 'POST':
         title = request.form['title']
-        description = request.form['description']
+        desc = request.form['description']
         files = request.files.getlist('files')
         filenames = []
         for f in files:
             safe_name = f"{datetime.datetime.utcnow().timestamp()}_{f.filename}"
             f.save(os.path.join(app.config['UPLOAD_FOLDER'], safe_name))
             filenames.append(safe_name)
-        course = Course(title=title, description=description, files=','.join(filenames), created_by=current_user.id)
+        course = Course(title=title, description=desc, files=','.join(filenames), created_by=current_user.id)
         db.session.add(course)
         db.session.commit()
-        flash('Course uploaded successfully!')
+        flash("Course uploaded successfully!")
     return render_template("upload_course.html")
 
 @app.route('/submit-assignment/<int:course_id>', methods=['GET','POST'])
@@ -139,22 +146,22 @@ def submit_assignment(course_id):
     if current_user.role != 'student':
         return "Access Denied"
     course = Course.query.get_or_404(course_id)
-    if request.method=='POST':
-        file = request.files['assignment']
-        filename = f"{current_user.id}_{course_id}_{file.filename}"
-        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        assignment = Assignment(student_id=current_user.id, course_id=course_id, filename=filename)
-        db.session.add(assignment)
+    if request.method == 'POST':
+        f = request.files['assignment']
+        fname = f"{current_user.id}_{course_id}_{f.filename}"
+        f.save(os.path.join(app.config['UPLOAD_FOLDER'], fname))
+        assign = Assignment(student_id=current_user.id, course_id=course_id, filename=fname)
+        db.session.add(assign)
         db.session.commit()
-        flash('Assignment submitted!')
+        flash("Assignment submitted!")
         return redirect(url_for('my_assignments'))
     return render_template("submit_assignment.html", course=course)
 
 @app.route('/my-assignments')
 @login_required
 def my_assignments():
-    assignments = Assignment.query.filter_by(student_id=current_user.id).all()
-    return render_template("my_assignments.html", assignments=assignments)
+    assigns = Assignment.query.filter_by(student_id=current_user.id).all()
+    return render_template("my_assignments.html", assignments=assigns)
 
 # ===== File Downloads =====
 @app.route('/uploads/<filename>')
@@ -162,7 +169,7 @@ def my_assignments():
 def download_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename, as_attachment=True)
 
-# ===== Email Verification, Register, Login, Logout =====
+# ===== Registration / Verification / Login / Logout =====
 @app.route('/register', methods=['GET','POST'])
 def register():
     if request.method=='POST':
@@ -174,11 +181,11 @@ def register():
         user = User(name=name,email=email,password=password,role=role,verification_code=code)
         db.session.add(user)
         db.session.commit()
-        # Send verification email
-        msg = Message('Verify Email', sender=app.config['MAIL_USERNAME'], recipients=[email])
+        # Send verification code via email
+        msg = Message("Verify Email", sender=app.config['MAIL_USERNAME'], recipients=[email])
         msg.body = f"Your verification code: {code}"
         mail.send(msg)
-        flash('Registered! Check your email for verification code.')
+        flash("Registered! Check email for verification code.")
         return redirect(url_for('verify'))
     return render_template("register.html")
 
@@ -188,12 +195,12 @@ def verify():
         email = request.form['email']
         code = request.form['code']
         user = User.query.filter_by(email=email).first()
-        if user and user.verification_code==code:
+        if user and user.verification_code == code:
             user.verified = True
             db.session.commit()
-            flash('Verified! You can login now.')
+            flash("Email verified! You can login now.")
             return redirect(url_for('login'))
-        flash('Invalid code!')
+        flash("Invalid code!")
     return render_template("verify.html")
 
 @app.route('/login', methods=['GET','POST'])
@@ -203,14 +210,14 @@ def login():
         password = request.form['password']
         user = User.query.filter_by(email=email).first()
         if not user:
-            flash('User not found!')
+            flash("User not found!")
         elif not user.verified:
-            flash('Verify your email first!')
+            flash("Verify your email first!")
         elif check_password_hash(user.password, password):
             login_user(user)
             return redirect(url_for('dashboard'))
         else:
-            flash('Wrong password!')
+            flash("Wrong password!")
     return render_template("login.html")
 
 @app.route('/logout')
@@ -224,11 +231,11 @@ def logout():
 @login_required
 def dashboard():
     courses = Course.query.all()
-    return render_template("dashboard.html", user=current_user, courses=courses)
+    messages = MessageModel.query.order_by(MessageModel.created_at.desc()).all() if current_user.role=='admin' else []
+    uploads = Assignment.query.order_by(Assignment.submitted_at.desc()).all() if current_user.role=='admin' else []
+    return render_template("dashboard.html", user=current_user, courses=courses, messages=messages, uploads=uploads)
 
 # ===== RUN =====
 if __name__=='__main__':
     db.create_all()
     app.run(debug=True)
-
-
