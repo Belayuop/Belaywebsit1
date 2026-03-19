@@ -265,43 +265,6 @@ footer {
     <p>
         I am passionate about research, epidemiology, and applying software, data analytics, and machine learning to public health challenges. I enjoy collaboration and supporting students in online learning.
     </p>
-
-    <h3>Education & Universities</h3>
-    <div class="edu-logos" style="display:flex; gap:20px; align-items:center; margin-bottom:20px;">
-        <a href="https://www.dbu.edu.et" target="_blank">
-            <img src="dbu-logo.png" alt="Debre Berhan University Logo" style="height:60px; border-radius:10px;">
-        </a>
-        <a href="https://www.uopeople.edu" target="_blank">
-            <img src="uopeople-logo.png" alt="University of the People Logo" style="height:60px; border-radius:10px;">
-        </a>
-    </div>
-
-    <h3>Courses</h3>
-    <ul>
-        <li>All Public Health Courses – Debre Berhan University</li>
-        <li>All Computer Science Courses – University of the People</li>
-    </ul>
-
-    <h3>Certificates</h3>
-    <ul>
-        <li>Recognizing and Challenging Implicit Bias for Career Growth</li>
-        <li>Financial Planning: Navigating Personal Finance</li>
-        <li>Building Strong Virtual Teams</li>
-        <li>Emerging Technologies and Their Impact on Future Careers</li>
-        <li>AI and the Future of Work</li>
-        <li>Understanding Cultural Competence and Global Perspectives</li>
-        <li>Leveraging Digital Collaboration Tools</li>
-        <li>Building Diverse and Effective Teams</li>
-        <li>Sustainability Badge</li>
-        <li>Orientation Completion Badge</li>
-    </ul>
-
-    <h3>CV / Upload</h3>
-    <form action="#" method="post" enctype="multipart/form-data">
-        <label for="cv-upload">Upload your CV (PDF only):</label><br><br>
-        <input type="file" id="cv-upload" name="cv-upload" accept=".pdf" required><br><br>
-        <button class="btn" type="submit">Upload CV</button>
-    </form>
 </section>
 
 <!-- ===== AI IMAGE ===== -->
@@ -322,12 +285,40 @@ footer {
 
 <!-- ===== PORTFOLIO ===== -->
 <section class="section" id="portfolio">
-    <h2>Portfolio</h2>
+    <h2>Portfolio & Skills</h2>
+
+    <!-- Skills -->
+    <h3>My Skills</h3>
     <ul>
-        <li>Smart Home System</li>
-        <li>Health Dashboard</li>
-        <li>IoT Projects</li>
+        <li>Python</li>
+        <li>HTML & CSS</li>
+        <li>JavaScript</li>
+        <li>AI & Machine Learning</li>
+        <li>IoT & Smart Home Projects</li>
+        <li>Data Analytics & Visualization</li>
+        <li>YouTube Content Creation</li>
         <li>Graphic Design</li>
+    </ul>
+
+    <!-- Certificates -->
+    <h3>Certificates</h3>
+    <p>Click a certificate to view it online:</p>
+    <ul>
+        <li>
+            <a href="https://www.udacity.com/certificate/e/5fc0f1d2-2170-11f1-91ed-df267d5daba5" target="_blank">
+                Udacity: AI Programming with Python Nanodegree
+            </a>
+        </li>
+        <!-- Add more certificates here -->
+    </ul>
+
+    <!-- Projects -->
+    <h3>Projects</h3>
+    <ul>
+        <li>Smart Home System – IoT & Automation</li>
+        <li>Health Dashboard – Data Analytics</li>
+        <li>AI & Machine Learning Experiments</li>
+        <li>YouTube Channel & Content Production</li>
     </ul>
 </section>
 
@@ -449,7 +440,6 @@ function showNote(noteId) {
     notes.forEach(id => {
         document.getElementById(id).style.display = id === noteId ? 'block' : 'none';
     });
-    // hide the dropdown after selection
     document.getElementById('education-dropdown').style.display = 'none';
 }
 </script>
