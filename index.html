@@ -141,6 +141,43 @@ nav a:hover {
     cursor: pointer;
 }
 
+/* COLLAPSIBLE PORTFOLIO */
+.collapsible {
+    background-color: #2E8B57;
+    color: white;
+    cursor: pointer;
+    padding: 12px 20px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 18px;
+    border-radius: 12px;
+    margin: 8px 0;
+    transition: background 0.3s;
+}
+
+.collapsible:hover {
+    background-color: #3CB371;
+}
+
+.active, .collapsible:active {
+    background-color: #3CB371;
+}
+
+.content-collapsible {
+    padding: 0 20px;
+    display: none;
+    overflow: hidden;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    margin-bottom: 15px;
+}
+
+.content-collapsible ul {
+    padding-left: 20px;
+}
+
 /* SOCIAL */
 .social-icons {
     text-align: center;
@@ -158,7 +195,6 @@ nav a:hover {
 .youtube { color: #FF0000; }
 .telegram { color: #0088CC; }
 .instagram { color: #E1306C; }
-.youtube-short { color: #FF0000; }
 .x { color: #1DA1F2; }
 
 .social-icons a:hover {
@@ -287,39 +323,57 @@ footer {
 <section class="section" id="portfolio">
     <h2>Portfolio & Skills</h2>
 
-    <!-- Skills -->
-    <h3>My Skills</h3>
-    <ul>
-        <li>Python</li>
-        <li>HTML & CSS</li>
-        <li>JavaScript</li>
-        <li>AI & Machine Learning</li>
-        <li>IoT & Smart Home Projects</li>
-        <li>Data Analytics & Visualization</li>
-        <li>YouTube Content Creation</li>
-        <li>Graphic Design</li>
-    </ul>
+    <button class="collapsible">My Skills</button>
+    <div class="content-collapsible">
+        <ul>
+            <li>Python</li>
+            <li>HTML & CSS</li>
+            <li>JavaScript</li>
+            <li>AI & Machine Learning</li>
+            <li>IoT & Smart Home Projects</li>
+            <li>Data Analytics & Visualization</li>
+            <li>YouTube Content Creation</li>
+            <li>Graphic Design</li>
+        </ul>
+    </div>
 
-    <!-- Certificates -->
-    <h3>Certificates</h3>
-    <p>Click a certificate to view it online:</p>
-    <ul>
-        <li>
-            <a href="https://www.udacity.com/certificate/e/5fc0f1d2-2170-11f1-91ed-df267d5daba5" target="_blank">
-                Udacity: AI Programming with Python Nanodegree
-            </a>
-        </li>
-        <!-- Add more certificates here -->
-    </ul>
+    <button class="collapsible">Certificates</button>
+    <div class="content-collapsible">
+        <ul>
+            <li>
+                <a href="https://www.udacity.com/certificate/e/5fc0f1d2-2170-11f1-91ed-df267d5daba5" target="_blank">
+                    Udacity: AI Programming with Python Nanodegree
+                </a>
+            </li>
+            <!-- Add more certificates -->
+        </ul>
+    </div>
 
-    <!-- Projects -->
-    <h3>Projects</h3>
-    <ul>
-        <li>Smart Home System – IoT & Automation</li>
-        <li>Health Dashboard – Data Analytics</li>
-        <li>AI & Machine Learning Experiments</li>
-        <li>YouTube Channel & Content Production</li>
-    </ul>
+    <button class="collapsible">Projects</button>
+    <div class="content-collapsible">
+        <ul>
+            <li>
+                <a href="https://belayuop.github.io/BA-HEALTHCARE-/" target="_blank">
+                    BA-HEALTHCARE Website
+                </a>
+            </li>
+            <li>
+                <a href="https://github.com/YourUsername/Smart-Home-System" target="_blank">
+                    Smart Home System – IoT & Automation
+                </a>
+            </li>
+            <li>
+                <a href="https://github.com/YourUsername/Health-Dashboard" target="_blank">
+                    Health Dashboard – Data Analytics
+                </a>
+            </li>
+            <li>
+                <a href="https://github.com/YourUsername/AI-ML-Experiments" target="_blank">
+                    AI & Machine Learning Experiments
+                </a>
+            </li>
+        </ul>
+    </div>
 </section>
 
 <!-- ===== AI CHATBOT ===== -->
@@ -441,6 +495,20 @@ function showNote(noteId) {
         document.getElementById(id).style.display = id === noteId ? 'block' : 'none';
     });
     document.getElementById('education-dropdown').style.display = 'none';
+}
+
+// Collapsible sections for Portfolio
+const coll = document.getElementsByClassName("collapsible");
+for (let i = 0; i < coll.length; i++) {
+    coll[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        const content = this.nextElementSibling;
+        if (content.style.display === "block") {
+            content.style.display = "none";
+        } else {
+            content.style.display = "block";
+        }
+    });
 }
 </script>
 
