@@ -5,7 +5,7 @@ from email.message import EmailMessage
 app = Flask(__name__)
 app.secret_key = "supersecretkey123"  # Needed for flash messages
 
-# Certificates (optional if you want dynamic display)
+# Certificates for portfolio
 certificates = [
     {
         "title": "Udacity: AI Fundamentals",
@@ -17,25 +17,31 @@ certificates = [
     }
 ]
 
+# Contact email credentials (hidden)
+RECEIVER_EMAIL = "kassanewbelay@gmail.com"   # Your email to receive messages
+SENDER_EMAIL = "your-sender-email@gmail.com" # Email used to send messages
+SENDER_PASSWORD = "your-app-password"        # Gmail App Password
+
+
 @app.route("/", methods=["GET", "POST"])
 def home():
     if request.method == "POST":
-        # Get form fields
+        # Get form data
         name = request.form.get("name")
         email = request.form.get("email")
         message = request.form.get("message")
 
-        # Prepare the email
+        # Prepare email
         msg = EmailMessage()
         msg["Subject"] = f"Portfolio Contact Form Message from {name}"
-        msg["From"] = "your-sender-email@gmail.com"  # Gmail to send from
-        msg["To"] = "kassanewbelay@gmail.com"       # Your receiving email
+        msg["From"] = SENDER_EMAIL
+        msg["To"] = RECEIVER_EMAIL
         msg.set_content(f"Name: {name}\nEmail: {email}\nMessage:\n{message}")
 
-        # Send email using Gmail SMTP
+        # Send via Gmail SMTP
         try:
             with smtplib.SMTP_SSL("smtp.gmail.com", 465) as smtp:
-                smtp.login("your-sender-email@gmail.com", "your-app-password")  # Use App Password
+                smtp.login(SENDER_EMAIL, SENDER_PASSWORD)
                 smtp.send_message(msg)
             flash("✅ Your message has been successfully submitted!", "success")
         except Exception as e:
@@ -45,7 +51,7 @@ def home():
         return redirect(url_for("home"))
 
     return render_template("index.html", certificates=certificates)
-    
+
 
 if __name__ == "__main__":
     app.run(debug=True)
