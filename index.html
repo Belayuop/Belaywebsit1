@@ -6,7 +6,6 @@
 <title>Belay Kassanew - Personal Portfolio</title>
 
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-<!-- Added Google Font for a modern look -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
@@ -250,7 +249,7 @@ body { font-family: 'Poppins', sans-serif; scroll-behavior: smooth; }
     transform: translateY(-5px);
 }
 
-/* RE-DESIGNED Certificate Cards (Modified your UL to beautiful Grid) */
+/* RE-DESIGNED Certificate Cards */
 .cert-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -313,15 +312,11 @@ nav {
     background-color: rgba(46, 139, 87, 0.9);
 }
 
-/* Sticky Contact form styling */
-#contact-form input, #contact-form textarea {
-    width: 100%;
-    padding: 12px;
-    margin: 10px 0;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    font-family: inherit;
-}
+/* UPI List Styling */
+.upi-search { width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 8px; border: 1px solid #2E8B57; }
+.upi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 10px; list-style: none; padding: 0; }
+.upi-grid li a { display: block; background: #fff; padding: 10px; border-left: 5px solid #2E8B57; text-decoration: none; color: #333; font-weight: 600; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); transition: 0.2s; }
+.upi-grid li a:hover { background: #e8f5e9; transform: translateX(5px); }
 </style>
 </head>
 
@@ -337,6 +332,7 @@ nav {
     <a href="#gallery">Gallery</a>
     <a href="#portfolio">Portfolio</a>
     <a href="#chatbot">AI</a>
+    <a href="#upi-section">UPI Courses</a>
     <a href="#contact">Contact</a>
     <div class="nav-dropdown">
         <a href="javascript:void(0)" class="dropbtn" onclick="toggleDropdown()">Education ⬇</a>
@@ -350,7 +346,6 @@ nav {
     </div>
 </nav>
 
-<!-- ===== INTRO ===== -->
 <section class="section" id="intro">
     <h2><i class="fas fa-user-circle"></i> About Me</h2>
     <div class="intro-box">
@@ -371,7 +366,57 @@ nav {
     </div>
 </section>
 
-<!-- ===== NEW BEAUTIFUL STATS SECTION ===== -->
+<section class="section" id="upi-section">
+    <h2 style="color: #d32f2f;"><i class="fas fa-graduation-cap"></i> UPI Study - Fast Track Your Degree</h2>
+    <p style="font-weight: bold; color: red;">⚠️ Don't waste your money or prolong your graduation! High quality education no matter where you come from.</p>
+    
+    <button class="collapsible">🎓 Click to Show All 70+ Courses & Links</button>
+    <div class="content-collapsible" style="padding-top: 20px;">
+        <input type="text" id="upiSearch" class="upi-search" onkeyup="searchUPI()" placeholder="Search courses (e.g. Accounting, Python, CS)...">
+        <ul class="upi-grid" id="upiList">
+            <li><a href="https://www.upistudy.com/?ref=772d95">Homepage Link</a></li>
+            <li><a href="https://www.upistudy.com/courses/managerial-accounting?ref=772d95">ACC 210: Managerial Accounting</a></li>
+            <li><a href="https://www.upistudy.com/courses/biology-1?ref=772d95">BIO 100: Introduction to Biology 1</a></li>
+            <li><a href="https://www.upistudy.com/courses/biology-2?ref=772d95">BIO 200: Introduction to Biology 2</a></li>
+            <li><a href="https://www.upistudy.com/courses/business-essentials?ref=772d95">BUS 100: Business Essentials</a></li>
+            <li><a href="https://www.upistudy.com/courses/principles-of-management?ref=772d95">BUS 101: Principles of Management</a></li>
+            <li><a href="https://www.upistudy.com/courses/foundations-of-leadership?ref=772d95">BUS 205: Foundations of Leadership</a></li>
+            <li><a href="https://www.upistudy.com/courses/leadership-organizational-behavior?ref=772d95">BUS 206: Leadership & Organizational Behaviour</a></li>
+            <li><a href="https://www.upistudy.com/courses/business-communication?ref=772d95">BUS 210: Business Communication</a></li>
+            <li><a href="https://www.upistudy.com/courses/business-ethics?ref=772d95">BUS 211: Business Ethics</a></li>
+            <li><a href="https://www.upistudy.com/courses/leading-organizational-change?ref=772d95">BUS 213: Leading Organizational Change</a></li>
+            <li><a href="https://www.upistudy.com/courses/project-management?ref=772d95">BUS 230: Project Management</a></li>
+            <li><a href="https://www.upistudy.com/courses/business-law?ref=772d95">BUS 250: Business Law (ACE)</a></li>
+            <li><a href="https://www.upistudy.com/courses/international-business?ref=772d95">BUS 300: International Business</a></li>
+            <li><a href="https://www.upistudy.com/courses/human-resources-management?ref=772d95">BUS 306: Human Resources Management</a></li>
+            <li><a href="https://www.upistudy.com/courses/globalization-international-management?ref=772d95">BUS 309: Globalization & International Management</a></li>
+            <li><a href="https://www.upistudy.com/courses/entrepreneurship?ref=772d95">BUS 310: Entrepreneurship</a></li>
+            <li><a href="https://www.upistudy.com/courses/chemistry?ref=772d95">Chem 111: Chemistry 1</a></li>
+            <li><a href="https://www.upistudy.com/bundles/ged-eds?ref=772d95">Core Gen Ed Transfer Pack</a></li>
+            <li><a href="https://www.upistudy.com/courses/trends-in-computer-science-it?ref=772d95">CS 140: Current Trends in CS & IT</a></li>
+            <li><a href="https://www.upistudy.com/courses/computer-concepts-applications?ref=772d95">CS 150: Computer Concepts and Applications</a></li>
+            <li><a href="https://www.upistudy.com/courses/introduction-to-html-css?ref=772d95">CS 180: Intro to HTML and CSS</a></li>
+            <li><a href="https://www.upistudy.com/courses/introduction-to-javascript?ref=772d95">CS 190: Intro to Javascript</a></li>
+            <li><a href="https://www.upistudy.com/courses/ethics-in-technology?ref=772d95">CS 195: Ethics in Technology</a></li>
+            <li><a href="https://www.upistudy.com/courses/introduction-to-networking?ref=772d95">CS 196: Intro to Networking</a></li>
+            <li><a href="https://www.upistudy.com/courses/fundamentals-of-information-technology?ref=772d95">CS 200: Fundamentals of IT</a></li>
+            <li><a href="https://www.upistudy.com/courses/introduction-to-linux?ref=772d95">CS 201: Intro to Linux</a></li>
+            <li><a href="https://www.upistudy.com/courses/introduction-to-java?ref=772d95">CS 210: Intro to Java</a></li>
+            <li><a href="https://www.upistudy.com/courses/programming-in-python?ref=772d95">CS 230: Programming in Python</a></li>
+            <li><a href="https://www.upistudy.com/courses/programming-in-c?ref=772d95">CS 240: Programming in C</a></li>
+            <li><a href="https://www.upistudy.com/courses/data-structures-algorithms?ref=772d95">CS 251: Data Structure and Algorithms</a></li>
+            <li><a href="https://www.upistudy.com/courses/Cybersecurity-ace?ref=772d95">CS 270: Cybersecurity (ACE)</a></li>
+            <li><a href="https://www.upistudy.com/courses/artificial-intelligence?ref=772d95">CS 373: Intro to Artificial Intelligence</a></li>
+            <li><a href="https://www.upistudy.com/courses/microeconomics?ref=772d95">ECO 251: Microeconomics</a></li>
+            <li><a href="https://www.upistudy.com/courses/macroeconomics?ref=772d95">ECO 252: Macroeconomics</a></li>
+            <li><a href="https://www.upistudy.com/courses/calculus-1?ref=772d95">Maths 165: Calculus 1</a></li>
+            <li><a href="https://www.upistudy.com/courses/introduction-to-psychology?ref=772d95">PSY 110: Intro to Psychology</a></li>
+            <li><a href="https://www.upistudy.com/bundles/PRO?ref=772d95">UPIStudy.com PRO</a></li>
+        </ul>
+        <p style="text-align: center; margin-top: 15px;">...And many more! Visit the <a href="https://www.upistudy.com/?ref=772d95">Homepage</a> to see all.</p>
+    </div>
+</section>
+
 <section class="section">
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); text-align: center; gap: 20px;">
         <div>
@@ -389,7 +434,6 @@ nav {
     </div>
 </section>
 
-<!-- ===== PROFILE & ACHIEVEMENTS ===== -->
 <section class="section" id="profile">
     <h2><i class="fas fa-graduation-cap"></i> Profile & Achievements</h2>
     <p>I am currently pursuing a <strong>dual degree</strong>:</p>
@@ -406,13 +450,11 @@ nav {
     </p>
 </section>
 
-<!-- ===== AI IMAGE ===== -->
 <section class="section">
     <h2>Artificial Intelligence</h2>
     <img src="ai.jpg" class="content-image" alt="AI">
 </section>
 
-<!-- ===== GALLERY ===== -->
 <section class="section" id="gallery">
     <h2><i class="fas fa-camera-retro"></i> Gallery</h2>
     <div class="gallery">
@@ -422,7 +464,6 @@ nav {
     </div>
 </section>
 
-<!-- ===== PORTFOLIO ===== -->
 <section class="section" id="portfolio">
     <h2>Portfolio & Skills</h2>
 
@@ -440,7 +481,6 @@ nav {
         </ul>
     </div>
 
-    <!-- MODIFIED Certificate Section into cards -->
     <button class="collapsible active">My Certificates</button>
     <div class="content-collapsible" style="display: block;">
         <div class="cert-grid">
@@ -477,14 +517,12 @@ nav {
     </div>
 </section>
 
-<!-- ===== AI CHATBOT ===== -->
 <section class="section" id="chatbot">
     <h2>BelayBot AI Assistant</h2>
     <p>Your personal learning assistant.</p>
     <button class="btn">Open BelayBot</button>
 </section>
 
-<!-- ===== YOUTUBE ===== -->
 <section class="section" id="youtube">
     <h2>My YouTube Channel</h2>
     <p class="subscribe-text">🙏 Please Support by Subscribing My Channel</p>
@@ -498,7 +536,6 @@ nav {
     </div>
 </section>
 
-<!-- ===== CONTACT ===== -->
 <section class="section" id="contact">
     <h2><i class="fas fa-envelope-open-text"></i> Contact Me</h2>
     <form id="contact-form" method="POST" action="/send_message">
@@ -510,7 +547,6 @@ nav {
     <div id="form-message"></div>
 </section>
 
-<!-- ===== EDUCATION NOTES (HIDDEN BY DEFAULT) ===== -->
 <section class="section" id="education-notes">
     <div id="medical" class="subsection">
         <h3>Medical Student Notes</h3>
@@ -554,7 +590,6 @@ nav {
     </div>
 </section>
 
-<!-- ===== SOCIAL ICONS ===== -->
 <div class="social-icons">
     <a href="https://facebook.com/belaykassanew.wasie" class="facebook" target="_blank"><i class="fab fa-facebook"></i></a>
     <a href="https://linkedin.com/in/belay-k-54743720a" class="linkedin" target="_blank"><i class="fab fa-linkedin"></i></a>
@@ -581,8 +616,6 @@ function showNote(noteId) {
         document.getElementById(id).style.display = id === noteId ? 'block' : 'none';
     });
     document.getElementById('education-dropdown').style.display = 'none';
-    
-    // Smooth scroll to notes section when a topic is selected
     document.getElementById('education-notes').scrollIntoView({ behavior: 'smooth' });
 }
 
@@ -602,11 +635,20 @@ for (let i = 0; i < coll.length; i++) {
 document.getElementById('contact-form').addEventListener('submit', async function(e) {
     e.preventDefault();
     const form = e.target;
-    // Note: Since there is no actual backend URL provided (/send_message),
-    // I am adding a visual feedback for demonstration.
     document.getElementById('form-message').textContent = "Message sent successfully!";
     form.reset();
 });
+
+/* UPI SEARCH SCRIPT (ADDED) */
+function searchUPI() {
+    var input = document.getElementById("upiSearch").value.toUpperCase();
+    var ul = document.getElementById("upiList");
+    var li = ul.getElementsByTagName("li");
+    for (var i = 0; i < li.length; i++) {
+        var txtValue = li[i].textContent || li[i].innerText;
+        li[i].style.display = (txtValue.toUpperCase().indexOf(input) > -1) ? "" : "none";
+    }
+}
 </script>
 
 </body>
